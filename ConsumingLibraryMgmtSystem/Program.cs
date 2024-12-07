@@ -1,7 +1,7 @@
 using System.Text;
-using ConsumingLibraryMgmtSystem.Models;
+using ClientSite.Services;
+using ConsumingLibraryMgmtSystem.Services.Author;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,11 +11,10 @@ builder.Services.AddControllersWithViews();
 
 // Register IHttpClientFactory
 builder.Services.AddHttpClient();  // Add this line to register IHttpClientFactory
-
+builder.Services.AddScoped<IAuthorService, AuthorService>();
 
 
 // Register your custom service
-
 builder.Services.AddHttpContextAccessor();
 // Add session with options
 builder.Services.AddSession(options =>

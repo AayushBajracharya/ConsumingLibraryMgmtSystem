@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Controllers
@@ -44,7 +45,7 @@ namespace LibraryManagementSystem.Controllers
                 var token = JsonConvert.DeserializeObject<dynamic>(result)?.token;
 
                 // Save the token in cookies or session
-                HttpContext.Response.Cookies.Append("AuthToken", token.ToString());
+                HttpContext.Session.GetString("JWToken");
                 return RedirectToAction("Index", "Home"); // Redirect to dashboard/home
             }
 
