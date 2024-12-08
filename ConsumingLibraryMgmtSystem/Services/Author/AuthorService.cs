@@ -59,8 +59,6 @@ namespace ConsumingLibraryMgmtSystem.Services.Author
             return response.IsSuccessStatusCode;
         }
 
-
-
         // Delete an author
         public async Task<bool> DeleteAuthorAsync(int id)
         {

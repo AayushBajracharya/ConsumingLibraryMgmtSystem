@@ -1,0 +1,233 @@
+﻿@* @model ConsumingLibraryMgmtSystem.Models.BookViewModel *@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    .side-bar {
+        background: #255d81;
+        width: 222px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+        .side-bar .btn {
+            background: #255d81;
+            width: 100%;
+            height: 48px;
+            color: #ffffff;
+            text-align: left;
+            font-family: "Montserrat-SemiBold", sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+            border: none;
+            position: relative;
+        }
+
+            .side-bar .btn img {
+                width: 24px;
+                height: 24px;
+                margin-right: 20px;
+            }
+
+            .side-bar .btn:hover {
+                background: #ffffff;
+                color: #255d81;
+            }
+
+                .side-bar .btn:hover img {
+                    filter: invert(24%) sepia(61%) saturate(2910%) hue-rotate(174deg) brightness(93%) contrast(102%);
+                }
+
+    .hsmss-library {
+        color: #ffffff;
+        text-align: center;
+        font-family: "Montserrat-SemiBold", sans-serif;
+        font-size: 30px;
+        line-height: 110%;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .container {
+        margin-left: 222px;
+        padding: 40px;
+        background-color: #f5f5f5;
+        min-height: 100vh;
+    }
+
+    .form-container {
+        background-color: #E3E3E3;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    .details-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+        .details-table thead {
+            background-color: #2d5275;
+            color: white;
+        }
+
+        .details-table th, .details-table td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .details-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .add-btn {
+        background-color: #2d5275;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+        .add-btn:hover {
+            background-color: #1c3b54;
+        }
+
+    .edit-btn, .delete-btn {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .edit-btn {
+        background-color: #f0ad4e;
+        color: white;
+    }
+
+    .delete-btn {
+        background-color: #d9534f;
+        color: white;
+    }
+
+    .form-control {
+        background: #D9D9D9;
+    }
+</style>
+
+<div class="container-fluid d-flex p-0">
+    <!-- Sidebar -->
+    <nav class="side-bar d-flex flex-column">
+        <div class="hsmss-library">HSMSS LIBRARY</div>
+        <button class="btn"><img src="/images/icons/Settings.png" alt="Settings Icon" /> Settings</button>
+        <a href="/Authors/Author" class="btn"><img src="/images/icons/Author.png" alt="Author Icon" /> Author</a>
+        <button class="btn"><img src="/images/icons/Books.png" alt="Books Icon" /> Books</button>
+        <button class="btn"><img src="/images/icons/Students.png" alt="Students Icon" /> Students</button>
+        <button class="btn"><img src="/images/icons/Transactions.png" alt="Transactions Icon" /> Transaction</button>
+        <button class="btn"><img src="/images/icons/Issuing.png" alt="Issuing Icon" /> Issuing</button>
+        <a href="/Account/Login" class="btn mt-auto"><img src="/images/icons/Logout.png" alt="Log Out Icon" /> Log Out</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h3>Books Management</h3>
+
+        <!-- Add/Edit Book Form -->
+        <div class="form-container">
+            <h4>Add Books/ Update Books</h4>
+            <form action="act" class="col-md-12" method="post">
+                <div class="p-1 custom-card mb-2">
+                    <div class="row mb-3">
+                        <!-- Row 1: Book ID and Title -->
+                        <div class="col-md-6">
+                            <label>Book ID</label>
+                            <input type="text" name="BookID" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Title</label>
+                            <input type="text" name="Title" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <!-- Row 2: Genre and ISBN -->
+                        <div class="col-md-7">
+                            <label>Genre</label>
+                            <input type="text" name="Genre" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label>ISBN</label>
+                            <input type="text" name="ISBN" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <!-- Row 3: Author ID and Quantity -->
+                        <div class="col-md-6">
+                            <label>Author ID</label>
+                            <input type="text" name="AuthorID" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Quantity</label>
+                            <input type="number" name="Quantity" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Row 4: Save Button -->
+                        <div class="col-md-12">
+                            <button type="submit" class="add-btn">Add Books</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- Books List -->
+        <h2>Books List</h2>
+        <table class="details-table">
+            <thead>
+                <tr>
+                    <th>Book ID</th>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Author ID</th>
+                    <th>Quantity</th>
+                    <th>ISBN</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BookID</td>
+                    <td>Title</td>
+                    <td>Genre</td>
+                    <td>AuthorID</td>
+                    <td>Quantity</td>
+                    <td>ISBN</td>
+                    <td>
+                        <form action="/Books/Manage" method="get" style="display:inline;">
+                            <input type="hidden" name="id">
+                            <button type="submit" class="edit-btn">Edit</button>
+                        </form>
+                        <form action="/Books/DeleteBook" method="post" style="display:inline;">
+                            <input type="hidden" name="id">
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

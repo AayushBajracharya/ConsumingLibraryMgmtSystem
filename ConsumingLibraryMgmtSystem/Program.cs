@@ -1,6 +1,7 @@
 using System.Text;
 using ClientSite.Services;
 using ConsumingLibraryMgmtSystem.Services.Author;
+using ConsumingLibraryMgmtSystem.Services.Book;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -12,6 +13,7 @@ builder.Services.AddControllersWithViews();
 // Register IHttpClientFactory
 builder.Services.AddHttpClient();  // Add this line to register IHttpClientFactory
 builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IBooksServices, BooksServices>();
 
 
 // Register your custom service

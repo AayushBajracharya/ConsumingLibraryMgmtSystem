@@ -46,20 +46,22 @@ namespace ClientSite.Controllers
             {
                 if (author.AuthorID == 0)
                 {
-                    // Add new author
+                    // Add author
                     var addSuccess = await _authorService.AddAuthorAsync(author);
                     if (!addSuccess)
                     {
                         ModelState.AddModelError("", "Failed to add author.");
+                        Console.WriteLine("Failed to add author");
                     }
                 }
                 else
                 {
-                    // Update existing author
+                    // Update author
                     var updateSuccess = await _authorService.UpdateAuthorAsync(author);
                     if (!updateSuccess)
                     {
                         ModelState.AddModelError("", "Failed to update author.");
+                        Console.WriteLine("Failed to update author");
                     }
                 }
 
@@ -88,8 +90,23 @@ namespace ClientSite.Controllers
             if (!deleteSuccess)
             {
                 ModelState.AddModelError("", "Failed to delete author.");
+                Console.WriteLine($"Failed to delete author with ID {id}");
             }
+
             return RedirectToAction("Author");
+        }
+
+        //public IActionResult Books()
+        //{
+        //    return View();
+        //}
+        public IActionResult Students()
+        {
+            return View();
+        }
+        public IActionResult Issuing()
+        {
+            return View();
         }
     }
 }
